@@ -92,7 +92,8 @@ main {
     font-weight: 500;
 }
 
-.filter-group select {
+.filter-group select, 
+.filter-group input {
     width: 100%;
     padding: 0.5rem;
     border: 1px solid #ddd;

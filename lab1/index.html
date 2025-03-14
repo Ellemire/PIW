@@ -15,7 +15,7 @@
     <header>
         <nav class="navbar">
             <div class="bookstore-name">
-                <h1>Księgarnia Yggdrasil</h1>
+                <h1><a href="index.html">Księgarnia Yggdrasil</a></h1>
             </div>
             <div class="nav-btns">
                 <button class="cart-btn">Koszyk</button>
@@ -59,6 +59,21 @@
                         <option value="soft-cover">Okładka miękka</option>
                         <option value="integrated-cover">Okładka zintegrowana</option>
                     </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="title-keyword">Tytuł:</label>
+                    <input type="text" id="title-keyword" placeholder="np. Hobbit">
+                </div>
+                
+                <div class="filter-group">
+                    <label for="author">Autor:</label>
+                    <input type="text" id="author" placeholder="np. Tolkien">
+                </div>
+                
+                <div class="filter-group">
+                    <label for="page-count">Liczba stron (minimum):</label>
+                    <input type="number" id="page-count" min="1" placeholder="np. 300">
                 </div>
 
                 <div class="filter-group">

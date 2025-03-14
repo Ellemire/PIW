@@ -1,0 +1,154 @@
+<!-- Strona główna, wyszukiwanie pozycji, tj. zawiera filtry, listę pozycji, które spełniają warunki wyszukiwania-->
+<!-- Mamy przycisk logowania/wylogowania i koszyka -->
+<!-- Oraz dodanie nowej pozycji -->
+
+<!DOCTYPE html>
+<html lang = pl>
+
+<head>
+    <title>Księgarnia Yggdrasil</title>
+    <meta charset="utf-8">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="bookstore-name">
+                <h1>Księgarnia Yggdrasil</h1>
+            </div>
+            <div class="nav-btns">
+                <button class="cart-btn">Koszyk</button>
+                <button class="login-btn">Zaloguj się</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="filters">
+            
+            <div class="filter-container">
+                <h2>Filtry</h2>
+
+                <div class="filter-group">
+                    <label for="genre">Gatunek:</label>
+                    <select id="genre">
+                        <option value="">Wszystkie</option>
+                        <option value="adventure-fiction">Przygodowe</option>
+                        <option value="fantasy">Fantasy</option>
+                        <option value="sci-fi">Science Fiction</option>
+                        <option value="crime-fiction">Kryminał</option>
+                        <option value="thriller">Thriller</option>
+                        <option value="horror">Horror</option>
+                        <option value="romance">Romans</option>
+                        <option value="contemporary-fiction">Obyczajowe</option>
+                        <option value="historical-fiction">Historyczne</option>
+                        <option value="non-fiction">Literatura faktu</option>
+                        <option value="literary-fiction">Literatura piękna</option>
+                        <option value="poetry">Poezja</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="type">Rodzaj:</label>
+                    <select id="genre">
+                        <option value="">Wszystkie</option>
+                        <option value="audiobook">Audiobooki</option>
+                        <option value="ebook">E-booki</option>
+                        <option value="hard-cover">Okładka twarda</option>
+                        <option value="soft-cover">Okładka miękka</option>
+                        <option value="integrated-cover">Okładka zintegrowana</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sort">Sortuj według:</label>
+                    <select id="sort">
+                        <option value="title-asc">Tytuł (A-Z)</option>
+                        <option value="title-desc">Tytuł (Z-A)</option>
+                        <option value="price-asc">Cena (rosnąco)</option>
+                        <option value="price-desc">Cena (malejąco)</option>
+                        <option value="newest">Najnowsze</option>
+                    </select>
+                </div>
+
+                <button class="filter-btn">Zastosuj filtry</button>
+            </div>
+        </section>
+
+        <section class="books">
+            <div class="books-header">
+                <h2>Nasze książki</h2>
+                <a href="index2.html" class="add-book-btn">Dodaj nową pozycję</a>
+            </div>
+
+            <div class="book-grid">
+                <div class="book-item">
+                    <div class="book-cover">
+                        <img src="example-book-cover.jpg" alt="Okładka książki">
+                    </div>
+                    <div class="book-info">
+                        <h3>Władca Pierścieni</h3>
+                        <p class="author">J.R.R. Tolkien</p>
+                        <p class="price">129.99 zł</p>
+                        <button class="add-to-cart">Dodaj do koszyka</button>
+                    </div>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-cover">
+                        <img src="example-book-cover.jpg" alt="Okładka książki">
+                    </div>
+                    <div class="book-info">
+                        <h3>Hobbit, czyli tam i z powrotem</h3>
+                        <p class="author">J.R.R. Tolkien</p>
+                        <p class="price">29.99 zł</p>
+                        <button class="add-to-cart">Dodaj do koszyka</button>
+                    </div>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-cover">
+                        <img src="example-book-cover.jpg" alt="Okładka książki">
+                    </div>
+                    <div class="book-info">
+                        <h3>Silmarillion</h3>
+                        <p class="author">J.R.R. Tolkien</p>
+                        <p class="price">99.99 zł</p>
+                        <button class="add-to-cart">Dodaj do koszyka</button>
+                    </div>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-cover">
+                        <img src="example-book-cover.jpg" alt="Okładka książki">
+                    </div>
+                    <div class="book-info">
+                        <h3>Ziemiomorze</h3>
+                        <p class="author">Ursula Le Guin</p>
+                        <p class="price">69.99 zł</p>
+                        <button class="add-to-cart">Dodaj do koszyka</button>
+                    </div>
+                </div>
+
+                <div class="book-item">
+                    <div class="book-cover">
+                        <img src="example-book-cover.jpg" alt="Okładka książki">
+                    </div>
+                    <div class="book-info">
+                        <h3>Sześć światów Hain</h3>
+                        <p class="author">Ursula Le Guin</p>
+                        <p class="price">69.99 zł</p>
+                        <button class="add-to-cart">Dodaj do koszyka</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Księgarnia Yggdrasil. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+</body>
+</html>

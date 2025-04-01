@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo List App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="add-list-container">
+            <input type="text" id="new-list-input" placeholder="Nowa lista...">
+            <button id="add-list-btn">+</button>
+        </div>
+
+        <div id="lists-container">
+            <!-- There will be lists -->
+        </div>
+
+        <div id="undo-container" class="hidden">
+            <button id="undo-btn">Cofnij</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="modal hidden">
+        <div class="modal-content">
+            <p id="modal-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-delete">Tak</button>
+                <button id="cancel-delete">Nie</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

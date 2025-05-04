@@ -325,3 +325,32 @@ footer {
   margin-right: 0.5rem;
   margin-left: 0.5rem;
 }
+
+/* app.css */
+.mine-btn {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: bold;
+}
+
+.mine-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.mine-btn.active {
+  background-color: #2a623d;
+  color: white;
+  border-color: #1a472a;
+}
+
+.no-books {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}

@@ -36,19 +36,19 @@ export function BookProvider({ children }) {
     fetchBooks();
   }, []);
 
-  // Dodaj nową książkę
-  const addBook = async (newBook) => {
+  const addBook = async (newBook, userId) => {
     try {
       const docRef = await addDoc(collection(db, 'books'), {
         ...newBook,
         addedDate: new Date().toISOString(),
+        addedBy: userId // Dodaj to pole
       });
-      setBooks([...books, { id: docRef.id, ...newBook}]);
+      setBooks([...books, { id: docRef.id, ...newBook, addedBy: userId }]);
     } catch (error) {
       console.error("Error adding book: ", error);
     }
   };
-
+  
   // Aktualizuj książkę
   const updateBook = async (id, updatedBook) => {
     try {

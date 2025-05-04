@@ -3,9 +3,12 @@ import { Link, useNavigate } from "react-router";
 import { useBooks } from "../contexts/BookContext";
 import BookFilters from "../components/BookFilters";
 import BookItem from "../components/BookItem";
+import { useAuth } from "../contexts/AuthContext";
+
 
 export default function Home() {
   const { books, deleteBook } = useBooks();
+  const { currentUser } = useAuth();
   const [filters, setFilters] = useState({
     genre: "",
     type: "",
@@ -14,11 +17,13 @@ export default function Home() {
     minPages: "",
     minPrice: "",
     maxPrice: "",
-    sort: "title-asc"
+    sort: "title-asc",
+    onlyMine: false
   });
 
   const filteredBooks = books.filter(book => {
-    return (
+    // Podstawowe filtry
+    const basicFilters = (
       (filters.genre === "" || book.genre === filters.genre) &&
       (filters.type === "" || book.type === filters.type) &&
       (filters.title === "" || book.title.toLowerCase().includes(filters.title.toLowerCase())) &&
@@ -27,6 +32,12 @@ export default function Home() {
       (filters.maxPrice === "" || book.price <= filters.maxPrice) &&
       (filters.minPages === "" || book.pages >= filters.minPages)
     );
+
+    if (filters.onlyMine && currentUser) {
+      return basicFilters && book.addedBy === currentUser.uid;
+    }
+
+    return basicFilters;
   }).sort((a, b) => {
     switch(filters.sort) {
       case 'title-asc':
@@ -44,9 +55,16 @@ export default function Home() {
     }
   });
 
+  const toggleOnlyMine = () => {
+    setFilters({
+      ...filters,
+      onlyMine: !filters.onlyMine
+    });
+  };
+
   return (
     <>
-      <BookFilters filters={filters} setFilters={setFilters} />
+      <BookFilters filters={filters} setFilters={setFilters} onToggleOnlyMine={toggleOnlyMine}/>
       
       <section className="books">
         <div className="books-header">

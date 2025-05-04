@@ -1,9 +1,12 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useBooks } from "../contexts/BookContext";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function New() {
-  const { currentUser, addBook } = useBooks();
+  const { addBook } = useBooks();
+  const { currentUser } = useAuth();
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',

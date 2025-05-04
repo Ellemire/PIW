@@ -1,6 +1,20 @@
 import { Link, useNavigate } from "react-router";
+import { useAuth } from '../contexts/AuthContext';
 
 export default function BookItem({ book, onDelete }) {
+  const { currentUser } = useAuth();
+  const isOwner = currentUser && book.addedBy === currentUser.uid;
+
+  const handleDelete = () => {
+    if (!isOwner) {
+      alert('Możesz usuwać tylko swoje książki');
+      return;
+    }
+    if (window.confirm('Czy na pewno chcesz usunąć tę książkę?')) {
+      onDelete(book.id);
+    }
+  };
+
   return (
     <div className="book-item">
       <div className="book-cover">
@@ -12,8 +26,16 @@ export default function BookItem({ book, onDelete }) {
         <p className="price">{book.price} zł</p>
         <button className="add-to-cart">Dodaj do koszyka</button>
         <div className="book-actions">
-          <Link to={`/edit/${book.id}`} className="edit-btn">Edytuj</Link>
-          <button onClick={() => onDelete(book.id)} className="delete-btn">Usuń</button>
+        {isOwner && (
+          <>
+            <Link to={`/edit/${book.id}`} className="edit-btn">
+              Edytuj
+            </Link>
+            <button onClick={handleDelete} className="delete-btn">
+              Usuń
+            </button>
+          </>
+        )}
         </div>
       </div>
     </div>

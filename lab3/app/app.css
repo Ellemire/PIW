@@ -354,3 +354,36 @@ footer {
   padding: 2rem;
   color: #666;
 }
+
+.book-actions {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-btn, .delete-btn {
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #2a623d;
+  color: white;
+  border: none;
+}
+
+.edit-btn:hover {
+  background-color: #1a472a;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}

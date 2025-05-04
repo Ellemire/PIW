@@ -41,9 +41,9 @@ export function BookProvider({ children }) {
     try {
       const docRef = await addDoc(collection(db, 'books'), {
         ...newBook,
-        addedDate: new Date().toISOString()
+        addedDate: new Date().toISOString(),
       });
-      setBooks([...books, { id: docRef.id, ...newBook }]);
+      setBooks([...books, { id: docRef.id, ...newBook}]);
     } catch (error) {
       console.error("Error adding book: ", error);
     }

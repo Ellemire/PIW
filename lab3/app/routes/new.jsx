@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { useBooks } from "../contexts/BookContext";
 
 export default function New() {
-  const { addBook } = useBooks();
+  const { currentUser, addBook } = useBooks();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',

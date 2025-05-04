@@ -9,6 +9,7 @@ import {
 import "./app.css";
 import Navbar from "./components/Navbar";
 import { BookProvider } from "./contexts/BookContext";
+import { AuthProvider } from './contexts/AuthContext';
 
 export const links = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -41,15 +42,17 @@ export function Layout({ children }) {
         <Links />
       </head>
       <body>
-        <BookProvider>
-          <Navbar />
-          <main className="container mx-auto px-4 py-6">{children}</main>
-          <footer className="bg-green-800 text-white text-center py-4 mt-8">
-            <p>&copy; 2025 Księgarnia Yggdrasil. Wszelkie prawa zastrzeżone.</p>
-          </footer>
-          <ScrollRestoration />
-          <Scripts />
-        </BookProvider>
+        <AuthProvider>
+          <BookProvider>
+            <Navbar />
+            <main className="container mx-auto px-4 py-6">{children}</main>
+            <footer className="bg-green-800 text-white text-center py-4 mt-8">
+              <p>&copy; 2025 Księgarnia Yggdrasil. Wszelkie prawa zastrzeżone.</p>
+            </footer>
+            <ScrollRestoration />
+            <Scripts />
+          </BookProvider>
+        </AuthProvider>
       </body>
     </html>
   );

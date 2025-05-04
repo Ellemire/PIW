@@ -12,7 +12,7 @@ export default function Home() {
     title: "",
     author: "",
     minPages: "",
-    minPrice: "", // Nowy filtr - minimalna cena
+    minPrice: "",
     maxPrice: "",
     sort: "title-asc"
   });

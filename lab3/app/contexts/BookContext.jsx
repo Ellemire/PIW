@@ -41,7 +41,7 @@ export function BookProvider({ children }) {
       const docRef = await addDoc(collection(db, 'books'), {
         ...newBook,
         addedDate: new Date().toISOString(),
-        addedBy: userId // Dodaj to pole
+        addedBy: userId
       });
       setBooks([...books, { id: docRef.id, ...newBook, addedBy: userId }]);
     } catch (error) {

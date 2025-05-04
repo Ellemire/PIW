@@ -9,17 +9,17 @@ export default function New() {
 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    title: '',
-    author: '',
+    title: 'Book',
+    author: 'Auth',
     genre: '',
-    price: 0,
+    price: 50,
     description: '',
     cover: null,
     publicationDate: '',
-    isbn: '',
-    publisher: '',
-    pages: 0,
-    quantity: 0
+    isbn: 1234567891000,
+    publisher: 'Wyd',
+    pages: 200,
+    quantity: 10
   });
 
   const handleChange = (e) => {
@@ -27,10 +27,20 @@ export default function New() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addBook(formData);
-    navigate("/");
+    
+    if (!currentUser) {
+      alert('Musisz być zalogowany, aby dodać książkę');
+      return;
+    }
+
+    try {
+      await addBook({...formData }, currentUser.uid);
+      navigate('/');
+    } catch (error) {
+      console.error('Błąd podczas dodawania książki:', error);
+    }
   };
 
   return (

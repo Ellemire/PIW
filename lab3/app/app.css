@@ -309,3 +309,10 @@ footer {
   padding: 1.5rem;
   margin-top: 3rem;
 }
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #2a623d;
+}

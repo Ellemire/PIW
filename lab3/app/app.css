@@ -112,6 +112,20 @@ main {
   height: 38px;
 }
 
+.price-range {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.price-range input {
+  width: 80px;
+}
+
+.range-separator {
+  padding: 0 0.5rem;
+}
+
 /* Books section */
 .books {
   background-color: white;

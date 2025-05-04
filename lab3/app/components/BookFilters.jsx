@@ -1,11 +1,33 @@
 import { Link, useNavigate } from "react-router";
 
+
 export default function BookFilters({ filters, setFilters }) {
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFilters({ ...filters, [name]: value });
     };
   
+    const handleNumberChange = (e) => {
+      const { name, value } = e.target;
+      setFilters({ 
+        ...filters, 
+        [name]: value === "" ? "" : Number(value) 
+      });
+    };
+
+    const clearFilters = () => {
+      setFilters({
+        genre: "",
+        type: "",
+        title: "",
+        author: "",
+        minPrice: "",
+        maxPrice: "",
+        minPages: "",
+        sort: "title-asc"
+      });
+    };
+
     return (
       <section className="filters">
         <div className="filter-container">
@@ -31,8 +53,8 @@ export default function BookFilters({ filters, setFilters }) {
           </div>
   
           <div class="filter-group">
-            <label for="type">Rodzaj:</label>
-            <select id="genre">
+            <label htmlFor="type">Rodzaj:</label>
+            <select id="type" name="type" value={filters.type} onChange={handleChange}>
                 <option value="">Wszystkie</option>
                 <option value="audiobook">Audiobooki</option>
                 <option value="ebook">E-booki</option>
@@ -66,14 +88,44 @@ export default function BookFilters({ filters, setFilters }) {
             />
           </div>
   
-          <div class="filter-group">
-                    <label for="page-count">Liczba stron (minimum):</label>
-                    <input type="number" id="page-count" min="1" placeholder="np. 300"/>
+          <div className="filter-group">
+            <label htmlFor="minPages">Minimalna liczba stron:</label>
+            <input
+              type="number"
+              id="minPages"
+              name="minPages"
+              min="1"
+              value={filters.minPages}
+              onChange={handleNumberChange}
+            />
+          </div>
+
+          <div className="filter-group">
+            <label>Cena (zł):</label>
+            <div className="price-range">
+              <input
+                type="number"
+                name="minPrice"
+                placeholder="Od"
+                min="0"
+                value={filters.minPrice}
+                onChange={handleNumberChange}
+              />
+              <span className="range-separator">-</span>
+              <input
+                type="number"
+                name="maxPrice"
+                placeholder="Do"
+                min="0"
+                value={filters.maxPrice}
+                onChange={handleNumberChange}
+              />
+            </div>
           </div>
 
           <div class="filter-group">
               <label for="sort">Sortuj według:</label>
-              <select id="sort">
+              <select id="sort" name="sort" value={filters.sort} onChange={handleChange}>
                   <option value="title-asc">Tytuł (A-Z)</option>
                   <option value="title-desc">Tytuł (Z-A)</option>
                   <option value="price-asc">Cena (rosnąco)</option>
@@ -82,7 +134,8 @@ export default function BookFilters({ filters, setFilters }) {
               </select>
           </div>
           
-          <button className="filter-btn">Zastosuj filtry</button>
+          <button type="button" className="filter-btn" onClick={() => setFilters({...filters})}>Zastosuj filtry</button>
+          <button type="button" className="filter-btn" onClick={clearFilters}>Wyczyść filtry</button>
         </div>
       </section>
     );

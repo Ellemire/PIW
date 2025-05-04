@@ -10,6 +10,9 @@ export function BookProvider({ children }) {
       author: "J.R.R. Tolkien",
       price: 129.99,
       genre: "fantasy",
+      type: "hard-cover",
+      pages: 923,
+      addedDate: new Date('2023-01-01').toISOString()
     },
     {
       id: 2,
@@ -17,6 +20,9 @@ export function BookProvider({ children }) {
       author: "J.R.R. Tolkien",
       price: 29.99,
       genre: "fantasy",
+      type: "soft-cover",
+      pages: 223,
+      addedDate: new Date('2020-01-01').toISOString()
     },
     {
       id: 3,
@@ -24,6 +30,9 @@ export function BookProvider({ children }) {
       author: "J.R.R. Tolkien",
       price: 99.99,
       genre: "fantasy",
+      type: "hard-cover",
+      pages: 823,
+      addedDate: new Date('2003-01-01').toISOString()
     },
     {
       id: 4,
@@ -31,6 +40,9 @@ export function BookProvider({ children }) {
       author: "Ursula Le Guin",
       price: 69.99,
       genre: "fantasy",
+      type: "hard-cover",
+      pages: 880,
+      addedDate: new Date('2013-01-01').toISOString()
     },
     {
       id: 5,
@@ -38,6 +50,9 @@ export function BookProvider({ children }) {
       author: "Ursula Le Guin",
       price: 69.99,
       genre: "sci-fi",
+      type: "hard-cover",
+      pages: 795,
+      addedDate: new Date('2023-02-01').toISOString()
     },
   ]);
 

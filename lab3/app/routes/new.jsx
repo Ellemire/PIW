@@ -87,6 +87,18 @@ export default function New() {
         </div>
         
         <div className="form-group">
+          <label htmlFor="type">Rodzaj:</label>
+          <select id="type" name="type" value={formData.type} onChange={handleChange} required>
+            <option value="">Wybierz rodzaj</option>
+            <option value="audiobook">Audiobook</option>
+            <option value="ebook">E-book</option>
+            <option value="hard-cover">Twarda oprawa</option>
+            <option value="soft-cover">Miękka oprawa</option>
+            <option value="integrated-cover">Okładka zintegrowana</option>
+          </select>
+        </div>
+
+        <div className="form-group">
           <label htmlFor="price">Cena (zł):</label>
           <input 
             type="number" 
@@ -97,18 +109,6 @@ export default function New() {
             value={formData.price}
             onChange={handleChange}
             required 
-          />
-        </div>
-        
-
-        <div className="form-group">
-          <label htmlFor="description">Opis książki:</label>
-          <textarea 
-            id="description" 
-            name="description" 
-            value={formData.description}
-            onChange={handleChange}
-            rows="5" 
           />
         </div>
         
@@ -157,13 +157,14 @@ export default function New() {
         
         <div className="form-group">
           <label htmlFor="pages">Liczba stron:</label>
-          <input 
-            type="number" 
-            id="pages" 
-            name="pages" 
-            min="1" 
+          <input
+            type="number"
+            id="pages"
+            name="pages"
+            min="1"
             value={formData.pages}
             onChange={handleChange}
+            required
           />
         </div>
         
@@ -177,6 +178,17 @@ export default function New() {
             value={formData.quantity}
             onChange={handleChange}
             required 
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="description">Opis książki:</label>
+          <textarea 
+            id="description" 
+            name="description" 
+            value={formData.description}
+            onChange={handleChange}
+            rows="5" 
           />
         </div>
         

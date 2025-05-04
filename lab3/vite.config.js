@@ -4,8 +4,9 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [reactRouter(), tailwindcss()],
+  base: '/',
   build: {
-    outDir: "build/client",
+    outDir: "build",
     manifest: true,
     rollupOptions: {
       input: "./app/root.jsx",

@@ -11,8 +11,5 @@ export default defineConfig({
     rollupOptions: {
       input: "./app/root.jsx",
     },
-  },
-  ssr: {
-    noExternal: ["@react-router/dev"],
-  },
+  }
 });

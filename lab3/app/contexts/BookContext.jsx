@@ -50,14 +50,26 @@ export function BookProvider({ children }) {
   };
   
   // Aktualizuj książkę
-  const updateBook = async (id, updatedBook) => {
+  const updateBook = async (id, updatedData) => {
     try {
-      await updateDoc(doc(db, 'books', id), updatedBook);
-      setBooks(books.map(book => 
-        book.id === id ? { ...book, ...updatedBook } : book
+      // Sprawdź czy książka istnieje i należy do użytkownika
+      const book = books.find(b => b.id === id);
+      if (!book || book.addedBy !== currentUser?.uid) {
+        throw new Error('Nie masz uprawnień do edycji tej książki');
+      }
+  
+      await updateDoc(doc(db, 'books', id), {
+        ...updatedData,
+        price: Number(updatedData.price),
+        pages: Number(updatedData.pages)
+      });
+      
+      setBooks(books.map(b => 
+        b.id === id ? { ...b, ...updatedData } : b
       ));
     } catch (error) {
       console.error("Error updating book: ", error);
+      throw error;
     }
   };
 

@@ -4,4 +4,5 @@ export default [
   index("routes/home.jsx"),
   route("/new", "routes/New.jsx"),
   route("edit:id", "routes/edit-book.jsx"),
+  route("/test-login", "routes/test-login.jsx"),
 ];

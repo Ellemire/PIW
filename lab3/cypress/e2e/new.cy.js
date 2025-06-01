@@ -1,11 +1,12 @@
 describe('Dodawanie nowej książki', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173')
-    // cy.loginTestUser() – np. custom command, jeśli masz
+    cy.visit('http://localhost:5173/test-login');
+    cy.contains('Zaloguj test_user').click();
+    cy.url().should('eq', 'http://localhost:5173/');
+    cy.contains('Wyloguj');
   });
 
   it('dodaje nową książkę i sprawdza, czy jest na liście', () => {
-    // Zakładamy, że masz nawigację do strony dodawania książki
     cy.contains('Dodaj nową pozycję').click(); // <- przycisk/link prowadzący do /new
 
     // Wypełnij formularz
@@ -25,7 +26,7 @@ describe('Dodawanie nowej książki', () => {
     cy.get('form').submit();
 
     // Sprawdź, że użytkownik jest przekierowany na stronę główną
-    cy.url().should('eq', `${Cypress.config().baseUrl}/`);
+    cy.url().should('eq', `http://localhost:5173/`);
 
     // Poczekaj na załadowanie książek
     cy.contains('.book-item', 'Cypress Test Book').should('exist');

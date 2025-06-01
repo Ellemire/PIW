@@ -23,3 +23,33 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('loginTestUser', () => {
+  cy.request({
+    method: 'POST',
+    url: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA1XygQQmX9r3fmW1uG8u32r8xpDXUGuGM`,
+    body: {
+      email: 'test_user@example.com',
+      password: 'test1234',
+      returnSecureToken: true,
+    },
+  }).then(({ body }) => {
+    const { idToken, localId, email } = body;
+
+    cy.visit('http://localhost:5173', {
+      onBeforeLoad(win) {
+        win.localStorage.setItem(
+          'firebase:authUser:yggdrasil-bookstore',
+          JSON.stringify({
+            uid: localId,
+            email: email,
+            stsTokenManager: {
+              accessToken: idToken,
+              expirationTime: Date.now() + 3600 * 1000,
+            },
+          })
+        );
+      },
+    });
+  });
+});

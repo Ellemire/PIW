@@ -69,7 +69,9 @@ export default function Home() {
       <section className="books">
         <div className="books-header">
           <h2>Nasze książki</h2>
-          <Link to="/new" className="add-book-btn">Dodaj nową pozycję</Link>
+          {currentUser && (
+            <Link to="/new" className="add-book-btn">Dodaj nową pozycję</Link>
+          )}
         </div>
 
         <div className="book-grid">

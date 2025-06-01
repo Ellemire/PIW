@@ -25,9 +25,11 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('loginTestUser', () => {
+  const apiKey = Cypress.env('firebaseApiKey');
+
   cy.request({
     method: 'POST',
-    url: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA1XygQQmX9r3fmW1uG8u32r8xpDXUGuGM`,
+    url: `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
     body: {
       email: 'test_user@example.com',
       password: 'test1234',

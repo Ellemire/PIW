@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 
 export default function Checkout() {
   const { cart, dispatch } = useCart();
-  const total = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  
+  // Upewnij się, że cena jest liczbą przed użyciem toFixed()
+  const total = cart.items.reduce((sum, item) => {
+    const price = typeof item.price === 'number' ? item.price : Number(item.price);
+    return sum + (price * item.quantity);
+  }, 0);
 
   const removeItem = (id) => dispatch({ type: 'REMOVE_ITEM', payload: id });
   const clearCart = () => dispatch({ type: 'CLEAR_CART' });
@@ -20,20 +25,24 @@ export default function Checkout() {
       ) : (
         <>
           <ul className="checkout-items">
-            {cart.items.map(item => (
-              <li key={item.id} className="checkout-item">
-                <div className="item-info">
-                  <h3>{item.title}</h3>
-                  <p>{item.quantity} × {item.price.toFixed(2)} zł</p>
-                </div>
-                <button 
-                  onClick={() => removeItem(item.id)}
-                  className="remove-btn"
-                >
-                  Usuń
-                </button>
-              </li>
-            ))}
+            {cart.items.map(item => {
+              // Konwertuj cenę na liczbę jeśli nie jest
+              const price = typeof item.price === 'number' ? item.price : Number(item.price);
+              return (
+                <li key={item.id} className="checkout-item">
+                  <div className="item-info">
+                    <h3>{item.title}</h3>
+                    <p>{item.quantity} × {price.toFixed(2)} zł</p>
+                  </div>
+                  <button 
+                    onClick={() => removeItem(item.id)}
+                    className="remove-btn"
+                  >
+                    Usuń
+                  </button>
+                </li>
+              );
+            })}
           </ul>
 
           <div className="checkout-summary">

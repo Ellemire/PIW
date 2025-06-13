@@ -1,14 +1,26 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useReducer, useEffect } from 'react';
 
 const CartContext = createContext();
 
+const loadCartFromStorage = () => {
+  try {
+    const savedCart = localStorage.getItem('yggdrasil-cart');
+    return savedCart ? JSON.parse(savedCart) : { items: [] };
+  } catch (error) {
+    console.error('Error loading cart from localStorage:', error);
+    return { items: [] };
+  }
+};
+
 const cartReducer = (state, action) => {
+  let newState;
+  
   switch (action.type) {
     case 'ADD_ITEM':
-      // Sprawdź czy książka już jest w koszyku
       const existingItem = state.items.find(item => item.id === action.payload.id);
+      
       if (existingItem) {
-        return {
+        newState = {
           ...state,
           items: state.items.map(item =>
             item.id === action.payload.id
@@ -16,31 +28,61 @@ const cartReducer = (state, action) => {
               : item
           ),
         };
+      } else {
+        newState = {
+          ...state,
+          items: [...state.items, { 
+            ...action.payload, 
+            quantity: 1,
+            price: Number(action.payload.price)
+          }],
+        };
       }
-      return {
-        ...state,
-        items: [...state.items, { ...action.payload, quantity: 1 }],
-      };
+      break;
 
     case 'REMOVE_ITEM':
-      return {
+      newState = {
         ...state,
         items: state.items.filter(item => item.id !== action.payload),
       };
+      break;
+
+    case 'UPDATE_QUANTITY':
+      newState = {
+        ...state,
+        items: state.items.map(item =>
+          item.id === action.payload.id
+            ? { ...item, quantity: Math.max(1, action.payload.quantity) }
+            : item
+        ),
+      };
+      break;
 
     case 'CLEAR_CART':
-      return {
-        ...state,
-        items: [],
-      };
+      newState = { items: [] };
+      break;
 
     default:
       return state;
   }
+
+  localStorage.setItem('yggdrasil-cart', JSON.stringify(newState));
+  return newState;
 };
 
 export const CartProvider = ({ children }) => {
-  const [cart, dispatch] = useReducer(cartReducer, { items: [] });
+  const [cart, dispatch] = useReducer(cartReducer, loadCartFromStorage());
+
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'yggdrasil-cart') {
+        dispatch({ type: 'RELOAD_CART', payload: loadCartFromStorage() });
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   return (
     <CartContext.Provider value={{ cart, dispatch }}>

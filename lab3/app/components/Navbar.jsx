@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import LoginButton from './LoginButton';
+import CartDropdown from './CartDropdown';
 
 export default function Navbar() {
   return (
@@ -9,11 +10,7 @@ export default function Navbar() {
           <h1><Link to="/">Księgarnia Yggdrasil</Link></h1>
         </div>
         <div className="nav-btns">
-          <Link to="/cart" className="cart-link">
-            <button className="cart-btn">
-              Koszyk
-            </button>
-          </Link>
+          <CartDropdown />
           <LoginButton />
         </div>
       </nav>

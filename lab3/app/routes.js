@@ -5,4 +5,5 @@ export default [
   route("/new", "routes/New.jsx"),
   route("edit:id", "routes/edit-book.jsx"),
   route("/test-login", "routes/test-login.jsx"),
+  route("checkout", "routes/Checkout.jsx")
 ];

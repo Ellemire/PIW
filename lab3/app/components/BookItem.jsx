@@ -1,7 +1,9 @@
 import { Link, useNavigate } from "react-router";
 import { useAuth } from '../contexts/AuthContext';
+import { useCart } from '../contexts/CartContext';
 
 export default function BookItem({ book, onDelete }) {
+  const { dispatch } = useCart();
   const { currentUser } = useAuth();
   const isOwner = currentUser && book.addedBy === currentUser.uid;
 
@@ -15,6 +17,18 @@ export default function BookItem({ book, onDelete }) {
     }
   };
 
+    const addToCart = () => {
+    dispatch({
+      type: 'ADD_ITEM',
+      payload: {
+        id: book.id,
+        title: book.title,
+        price: book.price,
+        cover: book.cover
+      }
+    });
+  };
+
   return (
     <div className="book-item">
       <div className="book-cover">
@@ -24,7 +38,7 @@ export default function BookItem({ book, onDelete }) {
         <h3>{book.title}</h3>
         <p className="author">{book.author}</p>
         <p className="price">{book.price} zł</p>
-        <button className="add-to-cart">Dodaj do koszyka</button>
+        <button className="add-to-cart" onClick={addToCart}>Dodaj do koszyka</button>
         <div className="book-actions">
         {isOwner && (
           <>
